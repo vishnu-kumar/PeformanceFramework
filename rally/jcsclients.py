@@ -100,8 +100,8 @@ class JCSClient(plugin.Plugin):
 	#AKIAIK2UHB7WNKPBTJLQ,VLj3S8zwSX6sOGqPXKjRpkpIXFrt9+eFUivWRwna
 	session = None
 	if(auth == None):
-		session = Session(aws_access_key_id='AKIAIK2UHB7WNKPBTJLQ',aws_secret_access_key='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',\
-			region_name='ap-southeast-1')	
+		session = Session(aws_access_key_id='',aws_secret_access_key='',\
+			region_name='')	
 	else:
 		session = Session(aws_access_key_id=auth.jcs_access_key_id, aws_secret_access_key=auth.jcs_secret_access_key, \
 					region_name = auth.region_name)
@@ -145,10 +145,10 @@ class JCSClient(plugin.Plugin):
 
 @configure("jcs_ec2")
 class JCS_EC2(JCSClient):
-	def create_client(self):
+	def create_client(self, *args, **kwargs):
 		ec2_client = self.get_client("ec2", 
-						aws_access_key_id="aws_access_key_test_user_6", 
-						aws_secret_access_key="aws_secret_key_test_user_6", 
+						aws_access_key_id=kwargs["access_key"], 
+						aws_secret_access_key=kwargs["secret_key"], 
 						region_name="RegionOne", 
 						api_version="2016-03-01",
 						endpoint_url="https://compute.ind-west-1.staging.jiocloudservices.com/services/Cloud")
@@ -156,8 +156,13 @@ class JCS_EC2(JCSClient):
 
 @configure("jcs_vpc")
 class JCS_VPC(JCSClient):
-        def create_client(self):
-                vpc_client = self._get_client("ec2", endpoint_url="https://vpc.ind-west-1.staging.jiocloudservices.com/services/Cloud")
+        def create_client(self, *args, **kwargs):
+                vpc_client = self._get_client("ec2",
+						aws_access_key_id=kwargs["access_key"],
+                                                aws_secret_access_key=kwargs["secret_key"],
+                                                region_name="RegionOne", 
+                                                api_version="2016-03-01", 
+						endpoint_url="https://vpc.ind-west-1.staging.jiocloudservices.com/services/Cloud")
                 return vpc_client
 
 
