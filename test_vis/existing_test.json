@@ -1,0 +1,54 @@
+{
+"type": "ExistingCloud",
+"auth_url": "https://iam.ind-west-1.staging.deprecated.jiocloudservices.com:5000/v3/",
+"region_name": "RegionOne",
+"endpoint_type": "public",
+"admin":{"username": "vis_testuser",
+          "password": "vis_testuser",
+          "tenant_name": "vis_project"
+      },
+"users":[{"username": "test_user_1",
+          "password": "test_u53r_1_P$%%W)RD",
+          "tenant_name": "test_tenant_1"
+      },
+      {"username": "test_user_2",
+       "password": "test_u53r_2_P$%%W)RD",
+          "tenant_name": "test_tenant_1"
+      },
+      {"username": "test_user_3",
+          "password": "test_u53r_3_P$%%W)RD",
+          "tenant_name": "test_tenant_1"
+      },
+      {"username": "test_user_4",
+          "password": "test_u53r_4_P$%%W)RD",
+          "tenant_name": "test_tenant_1"
+      },
+      {"username": "test_user_5",
+          "password": "test_u53r_5_P$%%W)RD",
+          "tenant_name": "test_tenant_1"
+      },
+      {"username": "test_user_6",
+          "password": "test_u53r_6_P$%%W)RD",
+          "tenant_name": "test_tenant_2"
+      },
+      {"username": "test_user_7",
+          "password": "test_u53r_7_P$%%W)RD",
+          "tenant_name": "test_tenant_2"
+      },
+      {"username": "test_user_8",
+          "password": "test_u53r_8_P$%%W)RD",
+          "tenant_name": "test_tenant_2"
+      },
+      {"username": "test_user_9",
+          "password": "test_u53r_9_P$%%W)RD",
+          "tenant_name": "test_tenant_2"
+      },
+      {"username": "test_user_10",
+          "password": "test_u53r_10_P$%%W)RD",
+          "tenant_name": "test_tenant_2"
+      }
+
+],
+"https_insecure": true,
+"https_cacert": "/home/vishnu/rally/local/lib/python2.7/site-packages/certifi/cacert.pem"
+}

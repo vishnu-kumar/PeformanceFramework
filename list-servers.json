@@ -1,0 +1,24 @@
+{
+    "AWSEC2Servers.list_servers": [
+        {
+            "args": {
+            },
+            "runner": {
+                "type": "constant",
+                "times": 10,
+                "concurrency": 4
+            }
+        }
+    ],
+   "AWSEC2Servers.run_and_stop_instances": [
+        {   
+            "args": {
+            },
+            "runner": {
+                "type": "constant",
+                "times": 2,
+                "concurrency": 1
+            }
+        }
+    ]
+}

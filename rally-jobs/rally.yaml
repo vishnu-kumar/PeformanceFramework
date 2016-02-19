@@ -1,0 +1,1029 @@
+---
+  KeystoneBasic.create_user:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_delete_user:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_user_set_enabled_and_delete:
+    -
+      args:
+        enabled: true
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        enabled: false
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_list_tenants:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.get_entities:
+    -
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        service_name: null
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        service_name: "nova"
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.add_and_remove_user_role:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_delete_role:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_add_and_list_user_roles:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_list_users:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_tenant:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_tenant_with_users:
+    -
+      args:
+        users_per_tenant: 10
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 3
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_user_update_password:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_update_and_delete_tenant:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_delete_user:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_delete_service:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_list_services:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_list_ec2credentials:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  KeystoneBasic.create_and_delete_ec2credential:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.create_alarm:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.create_and_delete_alarm:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.create_and_list_alarm:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.create_and_update_alarm:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.create_alarm_and_get_history:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        state: "ok"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerAlarms.list_alarms:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerEvents.create_user_and_get_event:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerEvents.create_user_and_list_event_types:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerEvents.create_user_and_list_events:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerTraits.create_user_and_list_trait_descriptions:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerTraits.create_user_and_list_traits:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerMeters.list_meters:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerResource.list_resources:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerSamples.list_samples:
+    -
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        ceilometer:
+          counter_name: "cpu_util"
+          counter_type: "gauge"
+          counter_unit: "instance"
+          counter_volume: 1.0
+          resources_per_tenant: 3
+          samples_per_resource: 3
+      sla:
+        failure_rate:
+          max: 0
+
+  Dummy.dummy:
+    -
+      args:
+        sleep: 0.25
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+        max_seconds_per_iteration: 1.0
+        max_avg_duration: 0.5
+        outliers:
+          max: 1
+          min_iterations: 10
+          sigmas: 10
+
+    -
+      args:
+        sleep: 0.25
+      runner:
+        type: "constant"
+        times: 8
+        concurrency: 4
+        max_cpu_count: 2
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.1
+      runner:
+        type: "constant_for_duration"
+        duration: 5
+        concurrency: 5
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.001
+      runner:
+        type: "rps"
+        times: 2000
+        rps: 200
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.1
+      runner:
+        type: "rps"
+        times: 5
+        rps: 0.5
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.1
+      runner:
+        type: "rps"
+        times: 5
+        rps: 0.2
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.001
+      runner:
+        type: "rps"
+        times: 200
+        rps: 20
+        max_concurrency: 10
+        max_cpu_count: 3
+      sla:
+        failure_rate:
+          max: 0
+
+    -
+      args:
+        sleep: 0.1
+      runner:
+        type: "serial"
+        times: 20
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        sleep: 0.01
+      runner:
+        type: "constant"
+        times: 1
+        concurrency: 1
+      context:
+          users:
+            tenants: 8
+            users_per_tenant: 4
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        sleep: 0.01
+      runner:
+        type: "constant"
+        times: 1
+        concurrency: 1
+      context:
+        quotas:
+          nova:
+            instances: 200
+            cores: 200
+            ram: -1
+            floating_ips: 200
+            fixed_ips: 200
+            metadata_items: -1
+            injected_files: -1
+            injected_file_content_bytes: -1
+            injected_file_path_bytes: -1
+            key_pairs: 500
+            security_groups: 400
+            security_group_rules: 600
+          cinder:
+            gigabytes: -1
+            snapshots: -1
+            volumes: -1
+      sla:
+        failure_rate:
+          max: 0
+
+  Dummy.dummy_exception:
+    -
+      args:
+        size_of_message: 5
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 5
+
+  Dummy.dummy_exception_probability:
+    -
+      args:
+        exception_probability: 0.5
+      runner:
+        type: "constant"
+        times: 100
+        concurrency: 1
+
+    -
+      args:
+        exception_probability: 0.05
+      runner:
+        type: "constant"
+        times: 2042
+        concurrency: 1
+
+    -
+      args:
+        exception_probability: 0.5
+      runner:
+        type: "constant"
+        times: 100
+        concurrency: 1
+      sla:
+        failure_rate:
+          min: 20
+          max: 80
+
+  Dummy.dummy_with_scenario_output:
+    -
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  Dummy.dummy_random_fail_in_atomic:
+    -
+      args:
+        exception_probability: 0.5
+      runner:
+        type: "constant"
+        times: 50
+        concurrency: 10
+
+  FakePlugin.testplugin:
+    -
+      runner:
+        type: "constant"
+        times: 4
+        concurrency: 4
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerStats.create_meter_and_get_stats:
+   -
+      args:
+        user_id: "user-id"
+        resource_id: "resource-id"
+        counter_volume: 1.0
+        counter_unit: ""
+        counter_type: "cumulative"
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerQueries.create_and_query_alarms:
+    -
+      args:
+        filter: {"and": [{"!=": {"state": "dummy_state"}},{"=": {"type": "threshold"}}]}
+        orderby: !!null
+        limit: 10
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerQueries.create_and_query_alarm_history:
+    -
+      args:
+        orderby: !!null
+        limit: !!null
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  CeilometerQueries.create_and_query_samples:
+    -
+      args:
+        filter: {"=": {"counter_unit": "instance"}}
+        orderby: !!null
+        limit: 10
+        counter_name: "cpu_util"
+        counter_type: "gauge"
+        counter_unit: "instance"
+        counter_volume: "1.0"
+        resource_id: "resource_id"
+      runner:
+        type: "constant"
+        times: 20
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  Authenticate.keystone:
+    -
+      runner:
+        type: "constant"
+        times: 40
+        concurrency: 20
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 10
+      sla:
+        failure_rate:
+          max: 0
+
+  Authenticate.validate_glance:
+    -
+      args:
+        repetitions: 2
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  Authenticate.validate_heat:
+    -
+      args:
+        repetitions: 2
+      runner:
+        type: "constant"
+        times: 10
+        concurrency: 5
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 5
+      sla:
+        failure_rate:
+          max: 0
+
+  HttpRequests.check_request:
+    -
+      args:
+        url: "http://www.example.com"
+        method: "GET"
+        status_code: 200
+      runner:
+        type: "constant"
+        times: 2
+        concurrency: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  HttpRequests.check_random_request:
+    -
+      args:
+        requests:
+          -
+            url: "http://www.example.com"
+            method: "GET"
+          -
+            url: "http://www.openstack.org"
+            method: "GET"
+        status_code: 200
+      runner:
+        type: "constant"
+        times: 2
+        concurrency: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  GlanceImages.list_images:
+    -
+      runner:
+        type: "constant"
+        times: 5
+        concurrency: 10
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 2
+        images:
+          image_url: "~/.rally/extra/fake-image.img"
+          image_type: "qcow2"
+          image_container: "bare"
+          images_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  GlanceImages.create_and_delete_image:
+    -
+      args:
+        image_location: "http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img"
+        container_format: "bare"
+        disk_format: "qcow2"
+      runner:
+        type: "constant"
+        times: 1
+        concurrency: 1
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
+
+  GlanceImages.create_and_list_image:
+    -
+      args:
+        image_location: "~/.rally/extra/fake-image.img"
+        container_format: "bare"
+        disk_format: "qcow2"
+      runner:
+        type: "constant"
+        times: 1
+        concurrency: 1
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+  GlanceImages.create_image_and_boot_instances:
+    -
+      args:
+        image_location: "http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img"
+        container_format: "bare"
+        disk_format: "qcow2"
+        flavor:
+            name: "m1.tiny"
+        number_instances: 2
+      runner:
+        type: "constant"
+        times: 1
+        concurrency: 1
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
+
+
+  SwiftObjects.create_container_and_object_then_list_objects:
+    -
+      args:
+        objects_per_container: 2
+        object_size: 5120
+      runner:
+        type: "constant"
+        times: 2
+        concurrency: 2
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        roles:
+          - "admin"
+      sla:
+        failure_rate:
+          max: 0
+
+  SwiftObjects.create_container_and_object_then_delete_all:
+    -
+      args:
+        objects_per_container: 5
+        object_size: 102400
+      runner:
+        type: "constant"
+        times: 4
+        concurrency: 2
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        roles:
+          - "admin"
+      sla:
+        failure_rate:
+          max: 0
+
+  SwiftObjects.create_container_and_object_then_download_object:
+    -
+      args:
+        objects_per_container: 5
+        object_size: 1024
+      runner:
+        type: "constant"
+        times: 6
+        concurrency: 3
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        roles:
+          - "admin"
+      sla:
+        failure_rate:
+          max: 0
+
+  NovaNetworks.create_and_list_networks:
+    -
+      args:
+        start_cidr: "10.10.0.0/24"
+      runner:
+        type: "constant"
+        times: 5
+        concurrency: 2
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
+
+  NovaNetworks.create_and_delete_network:
+    -
+      args:
+        start_cidr: "10.10.0.0/24"
+      runner:
+        type: "constant"
+        times: 5
+        concurrency: 2
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0

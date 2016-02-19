@@ -1,0 +1,29 @@
+{
+    "type": "ExistingCloud",
+    "auth_url": "http://example.net:5000/v2.0/",
+    "region_name": "RegionOne",
+    "endpoint_type": "public",
+    "admin": {
+        "username": "admin",
+        "password": "pa55word",
+        "tenant_name": "demo",
+        "access_key":"33353",
+        "secret_key":"cyty78c37"
+    },
+    "users": [
+        {
+            "username": "b1",
+            "password": "1234",
+            "tenant_name": "testing",
+            "access_key" : "my_access_key",
+            "secret_key" : "my_access_key"
+        },
+        {
+          "username": "b2",
+          "password": "1234",
+          "tenant_name": "testing",
+          "access_key" : "my_access_key",
+          "secret_key" : "my_access_key"
+        }
+    ]
+}

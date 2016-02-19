@@ -1,0 +1,16 @@
+{
+"type": "ExistingCloud",
+"auth_url": "https://iam.ind-west-1.staging.deprecated.jiocloudservices.com:5000/v3/",
+"region_name": "RegionOne",
+"endpoint_type": "public",
+"admin":{"username": "vis_testuser",
+          "password": "vis_testuser",
+          "tenant_name": "vis_project"
+      },
+"users":[{"username": "vis_testuser",
+          "password": "vis_testuser",
+          "tenant_name": "vis_project"
+      }],
+"https_insecure": true,
+"https_cacert": "/home/vishnu/rally/local/lib/python2.7/site-packages/certifi/cacert.pem"
+}
