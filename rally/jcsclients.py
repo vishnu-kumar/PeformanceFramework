@@ -97,7 +97,6 @@ class JCSClient(plugin.Plugin):
 
     def _get_session(self, auth=None):
 	from boto3.session import Session
-	#AKIAIK2UHB7WNKPBTJLQ,VLj3S8zwSX6sOGqPXKjRpkpIXFrt9+eFUivWRwna
 	session = None
 	if(auth == None):
 		session = Session(aws_access_key_id='',aws_secret_access_key='',\
