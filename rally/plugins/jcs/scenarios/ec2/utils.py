@@ -64,7 +64,6 @@ class JCSEC2Scenario(scenario.JCSScenario):
     @atomic.action_timer("jcs_ec2.list_servers")
     def _list_servers(self):
         """Returns user servers list."""
-	print self.context
         return self.clients("jcs_ec2").describe_instances()
 
     @atomic.action_timer("jcs_ec2.stop_instances")
@@ -92,8 +91,8 @@ class JCSEC2Scenario(scenario.JCSScenario):
         :param instanceType: string, instanceType like jcs.small, jcs.medium etc
         :returns : list of instanceIds launched 
         """
-	print "vishnu_context: ", self.context
-        instances = self.clients("jcs_ec2").run_instances(ImageId= ImageId, \
+	#TBD Vishnu --> need to get subnet 
+        instances = self.clients("jcs_ec2", self.context["jcs_user"]).run_instances(ImageId= ImageId, \
                                         InstanceTypeId=InstanceTypeId, **kwargs)
         instanceIds = []
         for instance in instances["Instances"]:
@@ -125,6 +124,22 @@ class JCSEC2Scenario(scenario.JCSScenario):
         """
         (instanceIds, instancesRes) = self._run_instances(ImageId, InstanceType, **kwargs)
         self._terminate_instances(instanceIds)
+
+    @atomic.action_timer("jcs_ec2.create_key_pair")
+    def _create_key_pair(self, keyName):
+	response = self.clients("jcs_ec2").create_key_pair(KeyName=keyName)
+	keyName = response['KeyName']
+	keyFingerPrint = response['KeyFingerprint']
+	keyMaterial = response['KeyMaterial']
+	return (keyMaterial, response)
+
+    @atomic.action_timer("jcs_ec2.list_key_pair")
+    def _list_key_pair(self, **kwargs):
+        self.clients("jcs_ec2").describe_key_pairs(**kwargs)
+
+    @atomic.action_timer("jcs_ec2.delete_key_pair")
+    def _delete_key_pair(self, keyName):
+	self.clients("jcs_ec2").delete_key_pair(KeyName=keyName)
 
     @atomic.action_timer("jcs_ec2.create_volume")
     def _create_volume(self, **kwargs):

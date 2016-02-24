@@ -183,7 +183,6 @@ class BenchmarkEngine(object):
         self.task = task
         self.admin = admin and objects.Endpoint(**admin) or None
         self.existing_users = users or []
-        print "VISHNU::::Existing user in engine : ", self.existing_users
         self.abort_on_sla_failure = abort_on_sla_failure
 
     @rutils.log_task_wrapper(LOG.info, _("Task validation check cloud."))
@@ -255,10 +254,8 @@ class BenchmarkEngine(object):
         #                 specified. So after switching to plugin base
         #                 and refactoring validation mechanism this place
         #                 will be replaced
-        print "Vishnu3"
 	with self._get_user_ctx_for_validation(ctx_conf) as ctx:
             ctx.setup()
-	    print "Vishnu4"
 	    admin = None
             #admin = osclients.Clients(self.admin)
             #user = osclients.Clients(ctx_conf["users"][0]["endpoint"])
@@ -266,7 +263,6 @@ class BenchmarkEngine(object):
             for u in ctx_conf["users"]:
                 #user = osclients.Clients(u["endpoint"])
 		user = None
-                print "Vishnu5"		
                 for subtask in config.subtasks:
                     for pos, scenario_obj in enumerate(subtask.scenarios):
                         #self._validate_config_semantic_helper(

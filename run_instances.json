@@ -2,10 +2,10 @@
     "JCSEC2Servers.run_instances": [
         {
             "args": {
-                 "ImageId": "ami-8843cebc",
-                 "InstanceTypeId" :"m1.large",
+                 "ImageId": "ami-11120e53",
+                 "InstanceTypeId" :"medium",
                  "InstanceCount" : 1,
-                 "SubnetId" : "subnet-52e7bace"
+                 "SubnetId" : "subnet-6742bdc2"
             },
             "runner": {
                 "type": "constant",

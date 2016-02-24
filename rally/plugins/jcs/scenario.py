@@ -52,7 +52,7 @@ class JCSScenario(scenario.Scenario):
 	"""
 	self._clients = jcsclients.Clients()
 
-    def clients(self, client_type, version=None):
+    def clients(self, client_type, version=None, **kwargs):
         """Returns a python jcs client of the requested type.
 
         The client will be that for one of the temporary non-administrator
@@ -63,9 +63,10 @@ class JCSScenario(scenario.Scenario):
 
         :returns: Standard jcs service client instance
         """
+	kwargs = self.context["jcs_user"]
         client = getattr(self._clients, client_type)
 
-        return client(version) if version is not None else client()
+        return client(version, **kwargs) if version is not None else client(**kwargs)
 
     def admin_clients(self, client_type, version=None):
 	pass

@@ -41,6 +41,14 @@ class JCSEC2Servers(utils.JCSEC2Scenario):
     def run_instances(self, ImageId, InstanceTypeId, **kwargs):
         self._run_instances(ImageId, InstanceTypeId, **kwargs)
 
+   
+    @scenario.configure(context={"cleanup": ["jcs_ec2"]})
+    def create_list_delete_keypair(self):
+	keyName =  self.generate_random_name()
+	(keyMaterial, response) = self._create_key_pair(keyName)
+	self._list_key_pair()
+	self._delete_key_pair(keyName)
+		
     @scenario.configure(context={"cleanup": ["jcs_ec2"]})
     def run_instances_1(self, imageId, instanceTypeId, instanceCount, subnetId):
 	self._run_instances(imageId, instanceTypeId, instanceCount, subnetId)
